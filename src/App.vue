@@ -118,7 +118,7 @@ export default {
 
     const addNewContact = contact => {
       console.log('running addContact ', contact)
-      contacts.list.push(contact)
+      contacts.list.push({...contact, address: { ...contact.address } })
       console.log('contacts', contacts)
       pageState.value = 'showContactsList'
     }
@@ -139,6 +139,9 @@ export default {
 </script>
 
 <style scoped>
+  ul {
+    height: 400px;
+  }
   .vue-logo {
     width: 200px;
   }
