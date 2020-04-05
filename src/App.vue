@@ -72,6 +72,19 @@
 <script>
 import { ref, reactive, computed } from 'vue'
 import TheNavBar from './views/TheNavBar.vue'
+const defaultContact = {
+    firstName: '',
+    lastName: '',
+    phoneNumber: '',
+    emailAddress: '',
+    address: {
+      lineOne: '',
+      lineTwo: '',
+      city: '',
+      state: '',
+      zip: '',
+    },
+  }
 
 export default {
   setup() {
@@ -98,28 +111,16 @@ export default {
         }
       ]
     })
-
     // Create Contacts
-    const newContact = reactive({
-      firstName: '',
-      lastName: '',
-      phoneNumber: '',
-      emailAddress: '',
-      address: {
-        lineOne: '',
-        lineTwo: '',
-        city: '',
-        state: '',
-        zip: '',
-      },
-    })
+    const defaultContactCopy = Object.assign({}, defaultContact)
+    let newContact = reactive(defaultContactCopy)
 
     // console.log('newContact', newContact.firstName)
 
     const addNewContact = contact => {
-      console.log('running addContact ', contact)
       contacts.list.push({...contact, address: { ...contact.address } })
-      console.log('contacts', contacts)
+      console.log('defaultContact: ', defaultContact)
+      newContact = Object.assign({}, defaultContact)
       pageState.value = 'showContactsList'
     }
 
