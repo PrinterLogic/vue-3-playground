@@ -2,13 +2,49 @@
 <!-- <div> -->
   <TheNavBar></TheNavBar>
   <div class="vasion-card" v-if="showAddContact">
-    <h3 class="title">New Contact</h3>
-    <img class="vue-logo" src="./assets/images/logo.png">
-    <h1>Hello Vue 3!</h1>
+    <h2 class="title">New Contact</h2>
+    <form></form>
+    <div class="input-group">
+      <label for="firstName">First Name</label>
+      <input id="firstName" type="text" v-model="newContact.firstName">
+    </div>
+    <div class="input-group">
+      <label for="lastName">Last Name</label>
+      <input id="lastName" type="text" v-model="newContact.lastName">
+    </div>
+    <div class="input-group">
+      <label for="phoneNumber">Phone Number</label>
+      <input id="phoneNumber" type="text" v-model="newContact.phoneNumber">
+    </div>
+    <div class="input-group">
+      <label for="emailAddress">Email Address</label>
+      <input id="emailAddress" type="text" v-model="newContact.emailAddress">
+    </div>
+    <div class="input-group">
+      <label for="addressLineOne">Line One</label>
+      <input id="addressLineOne" type="text" v-model="newContact.address.lineOne">
+    </div>
+    <div class="input-group">
+      <label for="lineTwo">Line Two</label>
+      <input id="lineTwo" type="text" v-model="newContact.address.lineTwo">
+    </div>
+    <div class="input-group">
+      <label for="city">City</label>
+      <input id="city" type="text" v-model="newContact.address.city">
+    </div>
+    <div class="input-group">
+      <label for="state">State</label>
+      <input id="state" type="text" v-model="newContact.address.state">
+    </div>
+    <div class="input-group">
+      <label for="zip">Zip</label>
+      <input id="zip" type="text" v-model="newContact.address.zip">
+    </div>
     <button @click="setPageState('showContactsList')">BACK</button>
-    <button @click="addNewContact">ADD</button>
+    <button @click="addNewContact(newContact)">ADD</button>
   </div>
   <div class="vasion-card" v-if="showContactsList">
+    <h2>Contacts</h2>
     <ul>
       <li v-for="(contact, index) in contacts.list" :key="index">
         <div class="line-item">
@@ -20,7 +56,7 @@
           <span>{{contact.emailAddress}}</span>
           <div class="address-group">
             <span>{{contact.address.lineOne}}</span>
-            <span>{{contact.address.linetwo}}</span>
+            <span>{{contact.address.lineTwo}}</span>
             <span>{{contact.address.city}}</span>
             <span>{{contact.address.state}}</span>
             <span>{{contact.address.zip}}</span>
@@ -71,7 +107,7 @@ export default {
       emailAddress: '',
       address: {
         lineOne: '',
-        linetwo: '',
+        lineTwo: '',
         city: '',
         state: '',
         zip: '',
@@ -84,6 +120,7 @@ export default {
       console.log('running addContact ', contact)
       contacts.list.push(contact)
       console.log('contacts', contacts)
+      pageState.value = 'showContactsList'
     }
 
     return {
